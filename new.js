@@ -6,7 +6,7 @@ $.getJSON('https://api.github.com/repos/jerrinm4/labexam/git/trees/main', data =
          $.getJSON(element["url"], data => {
     data['tree'].forEach(element1 => {
       console.log(element1['path'])
-       $("#codeslist").append("<li><a href='/code.html#"+element1['path']+"' target='_blank'>"+element1['path']+"</a></li>");
+       $("#codeslist").append("<li><a href='./code.html#"+element1['path']+"' target='_blank'>"+element1['path']+"</a></li>");
 
     });
     });
