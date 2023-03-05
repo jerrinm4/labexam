@@ -4,18 +4,18 @@
     <title>File Viewer</title>
   </head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-  const fileName = window.location.hash.substr(1);
-      fetch("./programs/" + fileName)
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("filename").textContent = fileName;
-          document.title = fileName;
-          const codeTag = document.getElementById("file-content");
-          codeTag.textContent = data;
-        })
-        .catch((error) => console.error(error));
-</script>
+  <script>
+    const fileName = window.location.hash.substr(1);
+    fetch("./programs/" + fileName)
+      .then((response) => response.text())
+      .then((data) => {
+        document.getElementById("filename").textContent = fileName;
+        document.title = fileName;
+        const codeTag = document.getElementById("file-content");
+        codeTag.textContent = data;
+      })
+      .catch((error) => console.error(error));
+  </script>
   <style>
     *,
     *:before,
@@ -75,33 +75,33 @@
     </main>
     <script>
       $(document).ready(function () {
-      const copyButtonLabel = "Copy Code";
-      let blocks = document.querySelectorAll("pre");
-      blocks.forEach((block) => {
-        if (navigator.clipboard) {
-          let button = document.createElement("button");
+        const copyButtonLabel = "Copy Code";
+        let blocks = document.querySelectorAll("pre");
+        blocks.forEach((block) => {
+          if (navigator.clipboard) {
+            let button = document.createElement("button");
 
-          button.innerText = copyButtonLabel;
-          block.appendChild(button);
+            button.innerText = copyButtonLabel;
+            block.appendChild(button);
 
-          button.addEventListener("click", async () => {
-            await copyCode(block, button);
-          });
+            button.addEventListener("click", async () => {
+              await copyCode(block, button);
+            });
+          }
+        });
+
+        async function copyCode(block, button) {
+          let code = block.querySelector("code");
+          let text = code.innerText;
+
+          await navigator.clipboard.writeText(text);
+          button.innerText = "Code Copied";
+
+          setTimeout(() => {
+            button.innerText = copyButtonLabel;
+          }, 700);
         }
       });
-
-      async function copyCode(block, button) {
-        let code = block.querySelector("code");
-        let text = code.innerText;
-
-        await navigator.clipboard.writeText(text);
-        button.innerText = "Code Copied";
-
-        setTimeout(() => {
-          button.innerText = copyButtonLabel;
-        }, 700);
-      }
-    });
     </script>
     <script src="prism.js"></script>
   </body>
